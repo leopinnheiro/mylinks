@@ -9,11 +9,16 @@ export default createGlobalStyle`
   }
 
   body {
-    background: ${({ theme }) => theme.backgroundColor};
+    background: ${({ theme }) => theme.colors.background};
     font-size: 1rem; /* 16px */
+    color: ${({ theme }) => theme.colors.gray[900]};
   }
 
   button {
     cursor: pointer;
+  }
+
+  a {
+    text-decoration: none;
   }
 `;
