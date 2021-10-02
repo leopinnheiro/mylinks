@@ -1,5 +1,7 @@
-export default function Home() {
+import PageHeader from '../../components/PageHeader';
+
+export default function NewLink() {
   return (
-    'Edit link'
+    <PageHeader title="Novo link" />
   );
 }

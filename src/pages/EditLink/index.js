@@ -1,5 +1,7 @@
-export default function Home() {
+import PageHeader from '../../components/PageHeader';
+
+export default function EditLink() {
   return (
-    'Homepage'
+    <PageHeader title="Editar Time Sheet" />
   );
 }
