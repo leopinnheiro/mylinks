@@ -18,8 +18,10 @@ export default function LinkForm({ buttonLabel }) {
         <Input placeholder="Descrição" />
       </FormGroup>
 
-      <FormGroup>
-        <Input placeholder="Link" />
+      <FormGroup
+        error="Link inválido né jão."
+      >
+        <Input placeholder="Link" error />
       </FormGroup>
 
       <FormGroup>
