@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { useState } from 'react';
 
 import { Form, ButtonContainer } from './styles';
 
@@ -8,25 +9,54 @@ import Select from '../Select';
 import Button from '../Button';
 
 export default function LinkForm({ buttonLabel }) {
+  const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
+  const [link, setLink] = useState('');
+  const [category, setCategory] = useState('');
+
+  function handleSubmit(event) {
+    event.preventDefault();
+
+    console.log({
+      name,
+      description,
+      link,
+      category,
+    });
+  }
+
   return (
-    <Form>
+    <Form onSubmit={handleSubmit}>
       <FormGroup>
-        <Input placeholder="Nome" />
+        <Input
+          value={name}
+          placeholder="Nome"
+          onChange={(event) => setName(event.target.value)}
+        />
       </FormGroup>
 
       <FormGroup>
-        <Input placeholder="Descrição" />
-      </FormGroup>
-
-      <FormGroup
-        error="Link inválido né jão."
-      >
-        <Input placeholder="Link" error />
+        <Input
+          value={description}
+          placeholder="Descrição"
+          onChange={(event) => setDescription(event.target.value)}
+        />
       </FormGroup>
 
       <FormGroup>
-        <Select>
-          <option value="">Nenhum</option>
+        <Input
+          value={link}
+          placeholder="Link"
+          onChange={(event) => setLink(event.target.value)}
+        />
+      </FormGroup>
+
+      <FormGroup>
+        <Select
+          value={category}
+          onChange={(event) => setCategory(event.target.value)}
+        >
+          <option value="">Categoria</option>
           <option value="produtividade">Produtividade</option>
           <option value="liberar-acessos">Liberação de acessos</option>
         </Select>
