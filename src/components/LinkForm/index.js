@@ -13,7 +13,7 @@ export default function LinkForm({ buttonLabel }) {
   const [description, setDescription] = useState('');
   const [link, setLink] = useState('');
   const [category, setCategory] = useState('');
-  const [, setErrors] = useState([]);
+  const [errors, setErrors] = useState([]);
 
   function addValidationError(field, message) {
     setErrors((prevState) => [
@@ -32,7 +32,7 @@ export default function LinkForm({ buttonLabel }) {
     setName(event.target.value);
 
     if (!event.target.value) {
-      addValidationError('name', 'Nome é obrigatório');
+      addValidationError('name', 'Nome é obrigatório.');
     } else {
       removeValidationError('name');
     }
@@ -42,7 +42,7 @@ export default function LinkForm({ buttonLabel }) {
     setDescription(event.target.value);
 
     if (!event.target.value) {
-      addValidationError('description', 'Descrição é obrigatória');
+      addValidationError('description', 'Descrição é obrigatória.');
     } else {
       removeValidationError('description');
     }
@@ -52,10 +52,14 @@ export default function LinkForm({ buttonLabel }) {
     setLink(event.target.value);
 
     if (!event.target.value) {
-      addValidationError('link', 'Link é obrigatório');
+      addValidationError('link', 'Link é obrigatório.');
     } else {
       removeValidationError('link');
     }
+  }
+
+  function getErrorMessageByFieldName(fieldName) {
+    return errors.find((error) => error.field === fieldName)?.message;
   }
 
   function handleSubmit(event) {
@@ -64,24 +68,33 @@ export default function LinkForm({ buttonLabel }) {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <FormGroup>
+      <FormGroup
+        error={getErrorMessageByFieldName('name')}
+      >
         <Input
+          error={getErrorMessageByFieldName('name')}
           value={name}
           placeholder="Nome"
           onChange={handleNameChange}
         />
       </FormGroup>
 
-      <FormGroup>
+      <FormGroup
+        error={getErrorMessageByFieldName('description')}
+      >
         <Input
+          error={getErrorMessageByFieldName('description')}
           value={description}
           placeholder="Descrição"
           onChange={handleDescriptionChange}
         />
       </FormGroup>
 
-      <FormGroup>
+      <FormGroup
+        error={getErrorMessageByFieldName('link')}
+      >
         <Input
+          error={getErrorMessageByFieldName('link')}
           value={link}
           placeholder="Link"
           onChange={handleLinkChange}

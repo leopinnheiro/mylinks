@@ -31,10 +31,10 @@ export default function Home() {
         <Card>
           <div className="info">
             <div className="link-name">
-              <strong>Time Sheet</strong>
+              <strong>Notion</strong>
               <small>produtividade</small>
             </div>
-            <span>Realizar apontamentos</span>
+            <span>Organização de tarefas</span>
           </div>
 
           <div className="actions">

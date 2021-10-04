@@ -106,7 +106,7 @@ export const Card = styled.div`
     span {
       display: block;
       font-size: 14px;
-      color: ${({ theme }) => theme.colors.gray[200]};
+      color: ${({ theme }) => theme.colors.gray[200]};z
     }
   }
 
