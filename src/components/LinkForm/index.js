@@ -15,7 +15,14 @@ export default function LinkForm({ buttonLabel }) {
   const [description, setDescription] = useState('');
   const [link, setLink] = useState('');
   const [category, setCategory] = useState('');
-  const { setError, removeError, getErrorMessageByFieldName } = useErrors();
+
+  const {
+    setError,
+    removeError,
+    getErrorMessageByFieldName,
+  } = useErrors();
+
+  const isFormValid = name && description && link;
 
   function handleNameChange(event) {
     setName(event.target.value);
@@ -24,16 +31,6 @@ export default function LinkForm({ buttonLabel }) {
       setError({ field: 'name', message: 'Nome é obrigatório.' });
     } else {
       removeError('name');
-    }
-  }
-
-  function handleDescriptionChange(event) {
-    setDescription(event.target.value);
-
-    if (!event.target.value) {
-      setError({ field: 'description', message: 'Descrição é obrigatória.' });
-    } else {
-      removeError('description');
     }
   }
 
@@ -59,19 +56,16 @@ export default function LinkForm({ buttonLabel }) {
         <Input
           error={getErrorMessageByFieldName('name')}
           value={name}
-          placeholder="Nome"
+          placeholder="Nome *"
           onChange={handleNameChange}
         />
       </FormGroup>
 
-      <FormGroup
-        error={getErrorMessageByFieldName('description')}
-      >
+      <FormGroup>
         <Input
-          error={getErrorMessageByFieldName('description')}
           value={description}
           placeholder="Descrição"
-          onChange={handleDescriptionChange}
+          onChange={(event) => setDescription(event.target.value)}
         />
       </FormGroup>
 
@@ -81,7 +75,7 @@ export default function LinkForm({ buttonLabel }) {
         <Input
           error={getErrorMessageByFieldName('link')}
           value={link}
-          placeholder="Link"
+          placeholder="Link *"
           onChange={handleLinkChange}
         />
       </FormGroup>
@@ -98,7 +92,7 @@ export default function LinkForm({ buttonLabel }) {
       </FormGroup>
 
       <ButtonContainer>
-        <Button type="submit">
+        <Button type="submit" disabled={!isFormValid}>
           {buttonLabel}
         </Button>
 

@@ -32,5 +32,10 @@ export default function useErrors() {
   }
 
   // Retornando objeto com as informações que devem ser externalizadas
-  return { setError, removeError, getErrorMessageByFieldName };
+  return {
+    errors,
+    setError,
+    removeError,
+    getErrorMessageByFieldName,
+  };
 }
