@@ -13,7 +13,7 @@ export default function LinkForm({ buttonLabel }) {
   const [description, setDescription] = useState('');
   const [link, setLink] = useState('');
   const [category, setCategory] = useState('');
-  const [errors, setErrors] = useState([]);
+  const [, setErrors] = useState([]);
 
   function addValidationError(field, message) {
     setErrors((prevState) => [
@@ -38,17 +38,28 @@ export default function LinkForm({ buttonLabel }) {
     }
   }
 
-  console.log(errors);
+  function handleDescriptionChange(event) {
+    setDescription(event.target.value);
+
+    if (!event.target.value) {
+      addValidationError('description', 'Descrição é obrigatória');
+    } else {
+      removeValidationError('description');
+    }
+  }
+
+  function handleLinkChange(event) {
+    setLink(event.target.value);
+
+    if (!event.target.value) {
+      addValidationError('link', 'Link é obrigatório');
+    } else {
+      removeValidationError('link');
+    }
+  }
 
   function handleSubmit(event) {
     event.preventDefault();
-
-    console.log({
-      name,
-      description,
-      link,
-      category,
-    });
   }
 
   return (
@@ -65,7 +76,7 @@ export default function LinkForm({ buttonLabel }) {
         <Input
           value={description}
           placeholder="Descrição"
-          onChange={(event) => setDescription(event.target.value)}
+          onChange={handleDescriptionChange}
         />
       </FormGroup>
 
@@ -73,7 +84,7 @@ export default function LinkForm({ buttonLabel }) {
         <Input
           value={link}
           placeholder="Link"
-          onChange={(event) => setLink(event.target.value)}
+          onChange={handleLinkChange}
         />
       </FormGroup>
 
