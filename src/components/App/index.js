@@ -13,6 +13,7 @@ function App() {
     <HashRouter>
       <ThemeProvider theme={defaultTheme}>
         <GlobalStyles />
+
         <Container>
           <Header />
           <Routes />

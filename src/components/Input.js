@@ -10,6 +10,7 @@ export default styled.input`
   outline: none;
   padding: 0 16px;
   font-size: 16px;
+  appearance: none; /*Desabilita a opção do navegador de dispositivos mobile que alteram o visual */
 
   transition: border-color 0.2s ease-in;
   &:focus {
