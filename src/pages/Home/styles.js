@@ -74,14 +74,14 @@ export const Card = styled.div`
   padding: 16px;
   border-radius: 4px;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
-  cursor: pointer;
+  /* cursor: pointer; */
 
   transition: all 0.2s ease-in;
-  &:hover {
+  /* &:hover {
     background: ${({ theme }) => theme.colors.gray[50]};
-  }
+  } */
 
   & + & {
     margin-top: 16px;
@@ -104,9 +104,11 @@ export const Card = styled.div`
     }
 
     span {
+      flex: 1;
+      overflow: hidden;
       display: block;
       font-size: 14px;
-      color: ${({ theme }) => theme.colors.gray[200]};z
+      color: ${({ theme }) => theme.colors.gray[200]};
     }
   }
 
