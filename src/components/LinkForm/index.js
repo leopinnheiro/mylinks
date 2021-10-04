@@ -13,6 +13,32 @@ export default function LinkForm({ buttonLabel }) {
   const [description, setDescription] = useState('');
   const [link, setLink] = useState('');
   const [category, setCategory] = useState('');
+  const [errors, setErrors] = useState([]);
+
+  function addValidationError(field, message) {
+    setErrors((prevState) => [
+      ...prevState,
+      { field, message },
+    ]);
+  }
+
+  function removeValidationError(field) {
+    setErrors((prevState) => prevState.filter(
+      (error) => error.field !== field,
+    ));
+  }
+
+  function handleNameChange(event) {
+    setName(event.target.value);
+
+    if (!event.target.value) {
+      addValidationError('name', 'Nome é obrigatório');
+    } else {
+      removeValidationError('name');
+    }
+  }
+
+  console.log(errors);
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -31,7 +57,7 @@ export default function LinkForm({ buttonLabel }) {
         <Input
           value={name}
           placeholder="Nome"
-          onChange={(event) => setName(event.target.value)}
+          onChange={handleNameChange}
         />
       </FormGroup>
 
