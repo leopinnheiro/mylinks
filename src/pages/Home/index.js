@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 
+import { useEffect, useState } from 'react';
+
 import {
   Container, InputSearchContainer, Header, ListContainer, Card,
 } from './styles';
@@ -9,6 +11,32 @@ import edit from '../../assets/images/icons/edit.svg';
 import trash from '../../assets/images/icons/trash.svg';
 
 export default function Home() {
+  const [links, setLinks] = useState([]);
+
+  useEffect(() => {
+    // const database = [{
+    //   id: '1',
+    //   name: 'Notion',
+    //   description: 'Organização de tarefas',
+    //   link: 'www.google.com',
+    //   category: 'Produtividade',
+    // }, {
+    //   id: '2',
+    //   name: 'Gmail',
+    //   description: 'Caixa de e-mails',
+    //   link: 'www.google.com',
+    //   category: '',
+    // }];
+
+    // localStorage.setItem('@mylinks-db', JSON.stringify(database));
+    const storageLinks = JSON.parse(
+      localStorage.getItem('@mylinks-db'),
+    );
+    if (storageLinks) {
+      setLinks(storageLinks);
+    }
+  }, []);
+
   return (
     <Container>
       <InputSearchContainer>
@@ -16,7 +44,10 @@ export default function Home() {
       </InputSearchContainer>
 
       <Header>
-        <strong>3 links</strong>
+        <strong>
+          {links.length}
+          {links.length === 1 ? ' link' : ' links'}
+        </strong>
         <Link to="/new">Novo link</Link>
       </Header>
 
@@ -28,24 +59,29 @@ export default function Home() {
           </button>
         </header>
 
-        <Card>
-          <div className="info">
-            <div className="link-name">
-              <strong>Notion</strong>
-              <small>produtividade</small>
+        {links.map((link) => (
+          <Card key={link.id}>
+            <div className="info">
+              <div className="link-name">
+                <strong>{link.name}</strong>
+                {link.category && (
+                  <small>{link.category}</small>
+                )}
+              </div>
+              <span>{link.description}</span>
             </div>
-            <span>Organização de tarefas</span>
-          </div>
 
-          <div className="actions">
-            <Link to="/edit/123">
-              <img src={edit} alt="Edit" />
-            </Link>
-            <button type="button">
-              <img src={trash} alt="Delete" />
-            </button>
-          </div>
-        </Card>
+            <div className="actions">
+              <Link to={`/edit/${link.id}`}>
+                <img src={edit} alt="Edit" />
+              </Link>
+              <button type="button">
+                <img src={trash} alt="Delete" />
+              </button>
+            </div>
+          </Card>
+        ))}
+
       </ListContainer>
     </Container>
   );
