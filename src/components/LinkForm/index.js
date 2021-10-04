@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 
+import useErrors from '../../hooks/useErrors';
+
 import { Form, ButtonContainer } from './styles';
 
 import FormGroup from '../FormGroup';
@@ -13,28 +15,15 @@ export default function LinkForm({ buttonLabel }) {
   const [description, setDescription] = useState('');
   const [link, setLink] = useState('');
   const [category, setCategory] = useState('');
-  const [errors, setErrors] = useState([]);
-
-  function addValidationError(field, message) {
-    setErrors((prevState) => [
-      ...prevState,
-      { field, message },
-    ]);
-  }
-
-  function removeValidationError(field) {
-    setErrors((prevState) => prevState.filter(
-      (error) => error.field !== field,
-    ));
-  }
+  const { setError, removeError, getErrorMessageByFieldName } = useErrors();
 
   function handleNameChange(event) {
     setName(event.target.value);
 
     if (!event.target.value) {
-      addValidationError('name', 'Nome é obrigatório.');
+      setError({ field: 'name', message: 'Nome é obrigatório.' });
     } else {
-      removeValidationError('name');
+      removeError('name');
     }
   }
 
@@ -42,9 +31,9 @@ export default function LinkForm({ buttonLabel }) {
     setDescription(event.target.value);
 
     if (!event.target.value) {
-      addValidationError('description', 'Descrição é obrigatória.');
+      setError({ field: 'description', message: 'Descrição é obrigatória.' });
     } else {
-      removeValidationError('description');
+      removeError('description');
     }
   }
 
@@ -52,14 +41,10 @@ export default function LinkForm({ buttonLabel }) {
     setLink(event.target.value);
 
     if (!event.target.value) {
-      addValidationError('link', 'Link é obrigatório.');
+      setError({ field: 'link', message: 'Link é obrigatório.' });
     } else {
-      removeValidationError('link');
+      removeError('link');
     }
-  }
-
-  function getErrorMessageByFieldName(fieldName) {
-    return errors.find((error) => error.field === fieldName)?.message;
   }
 
   function handleSubmit(event) {
