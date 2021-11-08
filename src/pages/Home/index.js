@@ -14,21 +14,21 @@ export default function Home() {
   const [links, setLinks] = useState([]);
 
   useEffect(() => {
-    // const database = [{
-    //   id: '1',
-    //   name: 'Notion',
-    //   description: 'Organização de tarefas',
-    //   link: 'www.google.com',
-    //   category: 'Produtividade',
-    // }, {
-    //   id: '2',
-    //   name: 'Gmail',
-    //   description: 'Caixa de e-mails',
-    //   link: 'www.google.com',
-    //   category: '',
-    // }];
+    const database = [{
+      id: '1',
+      name: 'Notion',
+      description: 'Organização de tarefas',
+      link: 'https://www.notion.so/pt-br',
+      category: 'Produtividade',
+    }, {
+      id: '2',
+      name: 'Gmail',
+      description: 'Caixa de e-mails',
+      link: 'https://www.google.com/',
+      category: '',
+    }];
 
-    // localStorage.setItem('@mylinks-db', JSON.stringify(database));
+    localStorage.setItem('@mylinks-db', JSON.stringify(database));
     const storageLinks = JSON.parse(
       localStorage.getItem('@mylinks-db'),
     );
@@ -60,7 +60,7 @@ export default function Home() {
         </header>
 
         {links.map((link) => (
-          <Card key={link.id}>
+          <Card key={link.id} href={link.link} target="_blank" rel="noopener noreferrer">
             <div className="info">
               <div className="link-name">
                 <strong>{link.name}</strong>
